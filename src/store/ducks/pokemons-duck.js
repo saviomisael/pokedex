@@ -1,8 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { listPokemons } from '../../services/pokemonsService';
 
 const pokemonsInitialState = {
   pokemonsList: [],
 };
+
+export const fetchPokemons = createAsyncThunk(
+  'pokemons/fetchPokemons',
+  async (_, thunkApi) => {
+    const data = await listPokemons();
+
+    thunkApi.dispatch(pokemonsActions.initPokemonsList(data));
+  },
+);
 
 const pokemonsSlice = createSlice({
   name: 'pokemons',
