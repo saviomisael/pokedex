@@ -1,32 +1,19 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
-import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import * as Styled from './styles';
+import { PokemonItem } from '../PokemonItem';
+import { useDispatch } from 'react-redux';
+import { pokemonsActions } from '../../store/ducks/pokemons-duck';
 
 export const PokemonsList = ({ pokemons }) => {
+  const dispatch = useDispatch();
+
+  const handleFavoriteClick = (pokemonId) => {
+    dispatch(pokemonsActions.toggleIsFavoriteByPokemonId(pokemonId));
+  };
+
   const content = pokemons.map((x) => (
     <Styled.ListItem key={x.id}>
-      <Styled.PokemonItem>
-        <Styled.PokemonImage src={x.pokemonImg} alt={x.name} />
-
-        <Styled.PokemonContent>
-          <Styled.Text>{x.name}</Styled.Text>
-          <Styled.Text align="right">{x.nationalNumber}</Styled.Text>
-          <Styled.TypeContainer>
-            <Styled.Bold>Tipos:</Styled.Bold>
-            {x.type.map((x) => (
-              <Styled.Text key={x}>{x}</Styled.Text>
-            ))}
-          </Styled.TypeContainer>
-          <Styled.ButtonFavorite type="button">
-            <FontAwesomeIcon
-              icon={x.isFavorite ? faStarSolid : faStarRegular}
-              color="#ca0d29"
-            />
-          </Styled.ButtonFavorite>
-        </Styled.PokemonContent>
-      </Styled.PokemonItem>
+      <PokemonItem pokemon={x} onFavoriteClick={handleFavoriteClick} />
     </Styled.ListItem>
   ));
 
