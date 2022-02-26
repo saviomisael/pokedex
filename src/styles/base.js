@@ -17,4 +17,9 @@ export const BaseStyles = createGlobalStyle`
     font-size: 62.5%;
     font-family: 'Montserrat', sans-serif;
   }
+  
+  button {
+    background: transparent;
+    border: none;
+  }
 `;
