@@ -11,6 +11,15 @@ const pokemonsSlice = createSlice({
     initPokemonsList(state, action) {
       state.pokemonsList = action.payload;
     },
+    toggleIsFavoriteByPokemonId(state, action) {
+      state.pokemonsList = state.pokemonsList.map((x) => {
+        if (x.id === action.payload) {
+          x.isFavorite = !x.isFavorite;
+        }
+
+        return x;
+      });
+    },
   },
 });
 
