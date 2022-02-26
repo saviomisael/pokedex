@@ -6,6 +6,7 @@ import * as Styled from './styles';
 
 export const PokemonItem = ({ pokemon, onFavoriteClick }) => {
   const buttonFavoriteIcon = pokemon.isFavorite ? faStarSolid : faStarRegular;
+  const pokemonTypeLabel = pokemon.type.length > 1 ? 'Tipos:' : 'Tipo:';
 
   const handleFavoriteClick = () => {
     onFavoriteClick(pokemon.id);
@@ -19,7 +20,7 @@ export const PokemonItem = ({ pokemon, onFavoriteClick }) => {
         <Styled.Text>{pokemon.name}</Styled.Text>
         <Styled.Text align="right">{pokemon.nationalNumber}</Styled.Text>
         <Styled.TypeContainer>
-          <Styled.Bold>Tipos:</Styled.Bold>
+          <Styled.Bold>{pokemonTypeLabel}</Styled.Bold>
           {pokemon.type.map((x) => (
             <Styled.Text key={x}>{x}</Styled.Text>
           ))}
