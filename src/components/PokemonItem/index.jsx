@@ -46,4 +46,5 @@ PokemonItem.propTypes = {
     id: PropTypes.string.isRequired,
     isFavorite: PropTypes.bool.isRequired,
   }).isRequired,
+  onFavoriteClick: PropTypes.func.isRequired,
 };
