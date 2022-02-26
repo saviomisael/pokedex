@@ -9,4 +9,10 @@ describe('<PokemonsList />', () => {
 
     expect(screen.getAllByRole('listitem')).toHaveLength(4);
   });
+
+  it('should not render anyone listitem when pokemons prop is empty', () => {
+    renderWithBaseStyles(<PokemonsList pokemons={[]} />);
+
+    expect(screen.queryAllByRole('listitem')).toHaveLength(0);
+  });
 });
