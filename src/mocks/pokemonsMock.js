@@ -82,3 +82,38 @@ export const pokemonsMock = [
     speed: 80,
   },
 ];
+
+export const pokemonsMappedMock = [
+  {
+    nationalNumber: '001',
+    pokemonImg: 'https://img.pokemondb.net/artwork/bulbasaur.jpg',
+    name: 'Bulbasaur',
+    type: ['Grass', 'Poison'],
+    id: '09c7c9e4-e32b-4f6a-9bfe-5b55c8e69d93',
+    isFavorite: false,
+  },
+  {
+    nationalNumber: '002',
+    pokemonImg: 'https://img.pokemondb.net/artwork/ivysaur.jpg',
+    name: 'Ivysaur',
+    type: ['Grass', 'Poison'],
+    id: '40e31bff-6cf6-4bf2-a6c4-4f3405be0d32',
+    isFavorite: false,
+  },
+  {
+    nationalNumber: '003',
+    pokemonImg: 'https://img.pokemondb.net/artwork/venusaur.jpg',
+    name: 'Venusaur',
+    type: ['Grass', 'Poison'],
+    id: '2c5c4704-c98d-4d24-8248-d426a2491b03',
+    isFavorite: false,
+  },
+  {
+    nationalNumber: '003',
+    pokemonImg: 'https://img.pokemondb.net/artwork/venusaur.jpg',
+    name: 'Venusaur',
+    type: ['Grass', 'Poison'],
+    id: 'd12827ea-82ba-428f-81fb-a21b91198c61',
+    isFavorite: false,
+  },
+];
