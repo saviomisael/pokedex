@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { fetchPokemons } from '../../store/ducks/pokemons-duck';
 import { FilterInput } from '../FilterInput';
 import { PokemonsList } from '../PokemonsList';
+import { SearchPokemonForm } from '../SearchPokemonForm';
 import * as Styled from './styles';
 
 export const Pokedex = () => {
@@ -13,12 +14,17 @@ export const Pokedex = () => {
   } = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(fetchPokemons());
+    const fetchPokemonsPromise = dispatch(fetchPokemons());
+
+    return () => {
+      fetchPokemonsPromise.abort();
+    };
   }, [dispatch]);
 
   return (
     <Styled.MainContent>
       <FilterInput />
+      <SearchPokemonForm />
       <PokemonsList pokemons={pokemonsToShow} />
     </Styled.MainContent>
   );
