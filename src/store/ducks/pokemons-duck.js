@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { listPokemons } from '../../services/pokemonsService';
-import { sortObjectsByStringAsc } from '../../utils/sortObjects';
+import {
+  sortObjectsByStringAsc,
+  sortObjectsByStringDesc,
+} from '../../utils/sortObjects';
 
 const pokemonsInitialState = {
   pokemonsList: [],
@@ -37,13 +40,9 @@ const pokemonsSlice = createSlice({
       state.pokemonsToShow = sortObjectsByStringAsc(state.pokemonsList)('name');
     },
     orderByNameDesc(state, action) {
-      state.pokemonsToShow = state.pokemonsList.sort((pokemon1, pokemon2) => {
-        if (pokemon2.name < pokemon1.name) return -1;
-
-        if (pokemon2.name > pokemon1.name) return 1;
-
-        return 0;
-      });
+      state.pokemonsToShow = sortObjectsByStringDesc(state.pokemonsList)(
+        'name',
+      );
     },
     orderByNationalNumberAsc(state, action) {
       state.pokemonsToShow = state.pokemonsList.sort(
