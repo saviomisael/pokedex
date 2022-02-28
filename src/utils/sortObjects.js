@@ -19,3 +19,8 @@ export const sortObjectsByStringDesc =
 
       return 0;
     });
+
+export const sortObjectsByNumberAsc =
+  ([...array]) =>
+  (property) =>
+    array.sort((a, b) => Number(a[property]) - Number(b[property]));
