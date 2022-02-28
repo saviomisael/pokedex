@@ -6,4 +6,5 @@ export const MainContent = styled.main`
   max-width: 78rem;
   margin: auto;
   row-gap: 2rem;
+  margin-bottom: 3rem;
 `;
