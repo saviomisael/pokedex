@@ -10,6 +10,7 @@ import {
 const pokemonsInitialState = {
   pokemonsList: [],
   pokemonsToShow: [],
+  filterByFavorites: false,
 };
 
 export const fetchPokemons = createAsyncThunk(
@@ -30,34 +31,51 @@ const pokemonsSlice = createSlice({
       state.pokemonsToShow = action.payload;
     },
     toggleIsFavoriteByPokemonId(state, action) {
-      state.pokemonsList = state.pokemonsList.map((x) => {
-        if (x.id === action.payload) {
-          x.isFavorite = !x.isFavorite;
+      const toggleIsFavoriteCallback = ({ ...pokemon }) => {
+        if (pokemon.id === action.payload) {
+          pokemon.isFavorite = !pokemon.isFavorite;
         }
 
-        return x;
-      });
+        return pokemon;
+      };
+
+      state.pokemonsList = state.pokemonsList.map(toggleIsFavoriteCallback);
+
+      let newPokemonsToShow = state.pokemonsToShow.map(
+        toggleIsFavoriteCallback,
+      );
+
+      if (state.filterByFavorites) {
+        newPokemonsToShow = newPokemonsToShow.filter((x) => x.isFavorite);
+      }
+
+      state.pokemonsToShow = newPokemonsToShow;
     },
     orderByNameAsc(state, action) {
       state.pokemonsToShow = sortObjectsByStringAsc(state.pokemonsList)('name');
+      state.filterByFavorites = false;
     },
     orderByNameDesc(state, action) {
       state.pokemonsToShow = sortObjectsByStringDesc(state.pokemonsList)(
         'name',
       );
+      state.filterByFavorites = false;
     },
     orderByNationalNumberAsc(state, action) {
       state.pokemonsToShow = sortObjectsByNumberAsc(state.pokemonsList)(
         'nationalNumber',
       );
+      state.filterByFavorites = false;
     },
     orderByNationalNumberDesc(state, action) {
       state.pokemonsToShow = sortObjectsByNumberDesc(state.pokemonsList)(
         'nationalNumber',
       );
+      state.filterByFavorites = false;
     },
     filterByFavoritesPokemons(state, action) {
       state.pokemonsToShow = state.pokemonsList.filter((x) => x.isFavorite);
+      state.filterByFavorites = true;
     },
   },
 });
