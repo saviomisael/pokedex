@@ -201,6 +201,7 @@ describe('pokemons duck', () => {
 
     stateModified.pokemonsToShow.forEach((x) => {
       expect(x.isFavorite).toBeTruthy();
+      expect(x.name.toLowerCase()).toContain('bulb');
     });
   });
 
