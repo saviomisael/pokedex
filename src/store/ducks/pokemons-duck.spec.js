@@ -100,4 +100,26 @@ describe('pokemons duck', () => {
       expect(x.nationalNumber).toBe(nationalNumberOrdered[index]);
     });
   });
+
+  it('should filter pokemons when isFavorite property is true', () => {
+    const mock = [...pokemonsMappedMock].map((x, index) => {
+      if (index % 2 === 0) {
+        const newPokemon = { ...x, isFavorite: true };
+        return newPokemon;
+      }
+
+      return x;
+    });
+
+    const stateModified = pokemonsReducer(
+      { pokemonsList: mock, pokemonsToShow: [] },
+      pokemonsActions.filterByFavoritesPokemons(),
+    );
+
+    expect(stateModified.pokemonsToShow).toHaveLength(2);
+
+    stateModified.pokemonsToShow.forEach((x) => {
+      expect(x.isFavorite).toBeTruthy();
+    });
+  });
 });
