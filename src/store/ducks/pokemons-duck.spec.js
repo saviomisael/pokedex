@@ -153,4 +153,16 @@ describe('pokemons duck', () => {
       expect(x.isFavorite).toBeTruthy();
     });
   });
+
+  it('should search a pokemon by national number', () => {
+    let stateModified = pokemonsReducer(
+      {
+        pokemonsList: [...pokemonsMappedMock],
+        pokemonsToShow: [...pokemonsMappedMock],
+      },
+      pokemonsActions.searchPokemon('002'),
+    );
+
+    expect(stateModified.pokemonsToShow).toHaveLength(1);
+  });
 });
