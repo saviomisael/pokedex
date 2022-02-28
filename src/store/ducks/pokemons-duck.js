@@ -87,13 +87,19 @@ const pokemonsSlice = createSlice({
       const isName = isNaN(Number(action.payload));
 
       const isNationalNumberValid =
-        Number(action.payload) > 0 && Number(action.payload) <= 807;
+        Number(action.payload) >= 0 && Number(action.payload) <= 807;
 
       const arrayToFilter = state.filterByFavorites
         ? 'pokemonsToShow'
         : 'pokemonsList';
 
-      if (isName) {
+      if (action.payload === '' && !state.filterByFavorites)
+        state.pokemonsToShow = state.pokemonsList;
+
+      if (action.payload === '' && state.filterByFavorites)
+        state.pokemonsToShow = state.pokemonsList.filter((x) => x.isFavorite);
+
+      if (isName && action.payload) {
         state.pokemonsToShow = state[arrayToFilter].filter((x) =>
           filterByName(action.payload)(x),
         );
