@@ -19,12 +19,18 @@ describe('pokemons duck', () => {
     const pokemonId = '09c7c9e4-e32b-4f6a-9bfe-5b55c8e69d93';
 
     let stateModified = pokemonsReducer(
-      { pokemonsList: [...pokemonsMappedMock] },
+      {
+        pokemonsList: [...pokemonsMappedMock],
+        pokemonsToShow: [...pokemonsMappedMock],
+      },
       pokemonsActions.toggleIsFavoriteByPokemonId(pokemonId),
     );
 
     expect(
       stateModified.pokemonsList.find((x) => x.id === pokemonId).isFavorite,
+    ).toBeTruthy();
+    expect(
+      stateModified.pokemonsToShow.find((x) => x.id === pokemonId).isFavorite,
     ).toBeTruthy();
 
     stateModified = pokemonsReducer(
@@ -35,6 +41,31 @@ describe('pokemons duck', () => {
     expect(
       stateModified.pokemonsList.find((x) => x.id === pokemonId).isFavorite,
     ).toBeFalsy();
+    expect(
+      stateModified.pokemonsToShow.find((x) => x.id === pokemonId).isFavorite,
+    ).toBeFalsy();
+  });
+
+  it('should filter pokemonsToShow after toggling isFavorite when filterByFavorites is true', () => {
+    const pokemonId = '09c7c9e4-e32b-4f6a-9bfe-5b55c8e69d93';
+
+    let stateModified = pokemonsReducer(
+      {
+        pokemonsList: [...pokemonsMappedMock],
+        pokemonsToShow: [...pokemonsMappedMock],
+        filterByFavorites: true,
+      },
+      pokemonsActions.toggleIsFavoriteByPokemonId(pokemonId),
+    );
+
+    expect(stateModified.pokemonsToShow).toHaveLength(1);
+
+    stateModified = pokemonsReducer(
+      { ...stateModified },
+      pokemonsActions.toggleIsFavoriteByPokemonId(pokemonId),
+    );
+
+    expect(stateModified.pokemonsToShow).toHaveLength(0);
   });
 
   it('should order pokemons by name in ascending order', () => {
