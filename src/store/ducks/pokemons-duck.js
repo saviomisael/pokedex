@@ -78,18 +78,30 @@ const pokemonsSlice = createSlice({
       state.filterByFavorites = true;
     },
     searchPokemon(state, action) {
-      if (isNaN(Number(action.payload))) {
-        state.pokemonsToShow = state.pokemonsList.filter((x) =>
-          x.name.toLowerCase().includes(action.payload),
-        );
-      }
+      const filterByName = (term) => (pokemon) =>
+        pokemon.name.toLowerCase().includes(term);
+
+      const filterByNationalNumber = (term) => (pokemon) =>
+        pokemon.nationalNumber.startsWith(term);
+
+      const isName = isNaN(Number(action.payload));
 
       const isNationalNumberValid =
         Number(action.payload) > 0 && Number(action.payload) <= 807;
 
+      const arrayToFilter = state.filterByFavorites
+        ? 'pokemonsToShow'
+        : 'pokemonsList';
+
+      if (isName) {
+        state.pokemonsToShow = state[arrayToFilter].filter((x) =>
+          filterByName(action.payload)(x),
+        );
+      }
+
       if (isNationalNumberValid) {
-        state.pokemonsToShow = state.pokemonsList.filter((x) =>
-          x.nationalNumber.startsWith(action.payload),
+        state.pokemonsToShow = state[arrayToFilter].filter((x) =>
+          filterByNationalNumber(action.payload)(x),
         );
       }
     },

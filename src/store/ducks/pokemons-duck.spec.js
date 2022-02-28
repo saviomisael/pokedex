@@ -177,4 +177,30 @@ describe('pokemons duck', () => {
 
     expect(stateModified.pokemonsToShow).toHaveLength(2);
   });
+
+  it('should search by name only favorite pokemons when filterByFavorites is true', () => {
+    const mock = [...pokemonsMappedMock].map((x, index) => {
+      if (index % 2 === 0) {
+        const newPokemon = { ...x, isFavorite: true };
+        return newPokemon;
+      }
+
+      return x;
+    });
+
+    const stateModified = pokemonsReducer(
+      {
+        pokemonsList: [...pokemonsMappedMock],
+        pokemonsToShow: [...mock],
+        filterByFavorites: true,
+      },
+      pokemonsActions.searchPokemon('bulb'),
+    );
+
+    expect(stateModified.pokemonsToShow).toHaveLength(1);
+
+    stateModified.pokemonsToShow.forEach((x) => {
+      expect(x.isFavorite).toBeTruthy();
+    });
+  });
 });
