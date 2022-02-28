@@ -40,4 +40,8 @@ export const BaseStyles = createGlobalStyle`
     background: transparent;
     border: none;
   }
+
+  li {
+    list-style: none;
+  }
 `;
