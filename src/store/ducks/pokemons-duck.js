@@ -62,6 +62,9 @@ const pokemonsSlice = createSlice({
           Number(pokemon2.nationalNumber) - Number(pokemon1.nationalNumber),
       );
     },
+    filterByFavoritesPokemons(state, action) {
+      state.pokemonsToShow = state.pokemonsList.filter((x) => x.isFavorite);
+    },
   },
 });
 
