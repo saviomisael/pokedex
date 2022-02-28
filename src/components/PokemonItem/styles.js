@@ -22,7 +22,6 @@ export const Pokemon = styled.article`
   border: 0.1rem solid #171717;
   border-radius: 0.6rem;
   max-width: 68rem;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
