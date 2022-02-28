@@ -3,6 +3,7 @@ import { listPokemons } from '../../services/pokemonsService';
 
 const pokemonsInitialState = {
   pokemonsList: [],
+  pokemonsToShow: [],
 };
 
 export const fetchPokemons = createAsyncThunk(
@@ -20,6 +21,7 @@ const pokemonsSlice = createSlice({
   reducers: {
     initPokemonsList(state, action) {
       state.pokemonsList = action.payload;
+      state.pokemonsToShow = action.payload;
     },
     toggleIsFavoriteByPokemonId(state, action) {
       state.pokemonsList = state.pokemonsList.map((x) => {
@@ -28,6 +30,15 @@ const pokemonsSlice = createSlice({
         }
 
         return x;
+      });
+    },
+    orderByNameAsc(state, action) {
+      state.pokemonsToShow = state.pokemonsList.sort((pokemon1, pokemon2) => {
+        if (pokemon1.name < pokemon2.name) return -1;
+
+        if (pokemon1.name > pokemon2.name) return 1;
+
+        return 0;
       });
     },
   },
