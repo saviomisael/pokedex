@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { renderWithBaseStyles } from '../../utils/styles-utils';
+import { renderWithBaseStyles } from '../../utils/tests-utils';
 import { PokemonItem } from '.';
 import { pokemonsMappedMock } from '../../mocks/pokemonsMock';
 
@@ -7,7 +7,9 @@ describe('<PokemonItem />', () => {
   it('should render favorite button when pokemon is favorite', () => {
     const mock = { ...pokemonsMappedMock[0], isFavorite: true };
 
-    renderWithBaseStyles(<PokemonItem pokemon={mock} />);
+    renderWithBaseStyles(
+      <PokemonItem pokemon={mock} onFavoriteClick={() => {}} />,
+    );
 
     expect(screen.getByTestId('buttonFavorite')).toHaveStyleRule(
       'opacity',
