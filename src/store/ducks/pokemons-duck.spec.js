@@ -84,4 +84,20 @@ describe('pokemons duck', () => {
       expect(x.nationalNumber).toBe(nationalNumberOrdered[index]);
     });
   });
+
+  it('should order pokemons by national number in descending order', () => {
+    const stateModified = pokemonsReducer(
+      {
+        pokemonsList: [...pokemonsMappedMock],
+        pokemonsToShow: [...pokemonsMappedMock],
+      },
+      pokemonsActions.orderByNationalNumberDesc(),
+    );
+
+    const nationalNumberOrdered = ['003', '003', '002', '001'];
+
+    stateModified.pokemonsToShow.forEach((x, index) => {
+      expect(x.nationalNumber).toBe(nationalNumberOrdered[index]);
+    });
+  });
 });
