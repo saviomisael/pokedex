@@ -155,7 +155,7 @@ describe('pokemons duck', () => {
   });
 
   it('should search a pokemon by national number', () => {
-    let stateModified = pokemonsReducer(
+    const stateModified = pokemonsReducer(
       {
         pokemonsList: [...pokemonsMappedMock],
         pokemonsToShow: [...pokemonsMappedMock],
@@ -164,5 +164,17 @@ describe('pokemons duck', () => {
     );
 
     expect(stateModified.pokemonsToShow).toHaveLength(1);
+  });
+
+  it('should search a pokemon by name', () => {
+    const stateModified = pokemonsReducer(
+      {
+        pokemonsList: [...pokemonsMappedMock],
+        pokemonsToShow: [...pokemonsMappedMock],
+      },
+      pokemonsActions.searchPokemon('venu'),
+    );
+
+    expect(stateModified.pokemonsToShow).toHaveLength(2);
   });
 });
