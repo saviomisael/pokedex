@@ -36,4 +36,20 @@ describe('pokemons duck', () => {
       stateModified.pokemonsList.find((x) => x.id === pokemonId).isFavorite,
     ).toBeFalsy();
   });
+
+  it('should order pokemons by name in ascending order', () => {
+    const stateModified = pokemonsReducer(
+      {
+        pokemonsList: [...pokemonsMappedMock].reverse(),
+        pokemonsToShow: [...pokemonsMappedMock].reverse(),
+      },
+      pokemonsActions.orderByNameAsc(),
+    );
+
+    const namesOrdered = ['Bulbasaur', 'Ivysaur', 'Venusaur', 'Venusaur'];
+
+    stateModified.pokemonsToShow.forEach((x, index) => {
+      expect(x.name).toBe(namesOrdered[index]);
+    });
+  });
 });
