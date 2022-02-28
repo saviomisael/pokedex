@@ -41,6 +41,15 @@ const pokemonsSlice = createSlice({
         return 0;
       });
     },
+    orderByNameDesc(state, action) {
+      state.pokemonsToShow = state.pokemonsList.sort((pokemon1, pokemon2) => {
+        if (pokemon2.name < pokemon1.name) return -1;
+
+        if (pokemon2.name > pokemon1.name) return 1;
+
+        return 0;
+      });
+    },
   },
 });
 
