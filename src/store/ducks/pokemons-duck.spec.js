@@ -52,4 +52,20 @@ describe('pokemons duck', () => {
       expect(x.name).toBe(namesOrdered[index]);
     });
   });
+
+  it('should order pokemons by name in descending order', () => {
+    const stateModified = pokemonsReducer(
+      {
+        pokemonsList: [...pokemonsMappedMock],
+        pokemonsToShow: [...pokemonsMappedMock],
+      },
+      pokemonsActions.orderByNameDesc(),
+    );
+
+    const namesOrdered = ['Venusaur', 'Venusaur', 'Ivysaur', 'Bulbasaur'];
+
+    stateModified.pokemonsToShow.forEach((x, index) => {
+      expect(x.name).toBe(namesOrdered[index]);
+    });
+  });
 });
