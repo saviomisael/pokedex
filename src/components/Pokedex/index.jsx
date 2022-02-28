@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { fetchPokemons } from '../../store/ducks/pokemons-duck';
-import { FilterInput } from '../FilterInput';
 import { PokemonsList } from '../PokemonsList';
-import { SearchPokemonForm } from '../SearchPokemonForm';
+import { PokedexBar } from './PokedexBar';
 import * as Styled from './styles';
 
 export const Pokedex = () => {
@@ -23,8 +22,7 @@ export const Pokedex = () => {
 
   return (
     <Styled.MainContent>
-      <FilterInput />
-      <SearchPokemonForm />
+      <PokedexBar />
       <PokemonsList pokemons={pokemonsToShow} />
     </Styled.MainContent>
   );
