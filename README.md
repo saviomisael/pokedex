@@ -2,7 +2,7 @@
 
 ## Info
 
-Esta aplicação foi gerada a partir do [CRA](https://create-react-app.dev/).
+Esta aplicação foi gerada a partir do [CRA](https://create-react-app.dev/). Para acessá-la [clique aqui](https://pokedex-45639b.netlify.app/).
 
 ## Como executar o build ou a aplicação
 
